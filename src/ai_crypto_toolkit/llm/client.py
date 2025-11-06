@@ -18,10 +18,24 @@ class LLMClient:
 
     def __init__(self, config: LLMConfig):
         self.config = config
+
+        # Build headers
+        headers = {
+            "Authorization": f"Bearer {config.api_key}",
+            "Content-Type": "application/json",
+        }
+
+        # Add OpenRouter-specific headers if using OpenRouter
+        if "openrouter.ai" in config.api_base.lower():
+            headers.update({
+                "HTTP-Referer": "https://github.com/0xSero/ai-crypto-toolkit",
+                "X-Title": "AI Crypto Toolkit",
+            })
+
         self.client = httpx.AsyncClient(
             base_url=config.api_base,
             timeout=config.timeout,
-            headers={"Authorization": f"Bearer {config.api_key}"},
+            headers=headers,
         )
 
     async def __aenter__(self) -> "LLMClient":
