@@ -13,6 +13,8 @@ from .analyzers.fuzzing import fuzz_and_analyze, generate_property_tests
 from .analyzers.gas import format_gas_optimization, optimize_gas
 from .analyzers.security import audit_contract, format_security_audit
 from .analyzers.transaction import explain_transaction, format_transaction_explanation
+from .cli_history import history
+from .cli_projects import project
 from .config import Config, create_default_config, load_config
 from .llm.client import LLMClient, test_llm_connection
 
@@ -397,6 +399,11 @@ Unchecked Calls: {config.security.check_unchecked_calls}
         )
     )
     console.print()
+
+
+# Register command groups
+cli.add_command(project)
+cli.add_command(history)
 
 
 def main() -> None:
