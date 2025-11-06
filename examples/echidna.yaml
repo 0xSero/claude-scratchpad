@@ -1,0 +1,38 @@
+# Echidna Configuration Example
+# See: https://github.com/crytic/echidna
+
+# Test settings
+testMode: "property"  # or "assertion", "overflow", "optimization"
+testLimit: 50000      # Number of transactions to generate
+timeout: 300          # Timeout in seconds
+
+# Contract settings
+contractAddr: "0x00a329c0648769A73afAc7F9381E08FB43dBEA72"
+deployer: "0x30000"
+sender: ["0x10000", "0x20000", "0x30000"]  # Addresses to use for testing
+
+# Coverage settings
+coverage: true
+corpusDir: "corpus"
+
+# Output
+format: "text"  # or "json"
+
+# Property testing
+checkAsserts: true
+filterBlacklist: false
+filterFunctions: []
+
+# Corpus settings
+seqLen: 100        # Length of transaction sequences
+shrinkLimit: 5000  # Max shrinking attempts
+
+# Advanced
+multi-abi: false
+workers: 1
+
+# Gas settings
+estimateGas: true
+
+# Specific to VulnerableBank example:
+# This config is optimized to find reentrancy and access control issues

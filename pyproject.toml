@@ -1,0 +1,73 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ai-crypto-toolkit"
+version = "0.1.0"
+description = "AI-powered smart contract analysis using local LLMs"
+authors = [{name = "0xSero", email = "0xsero@proton.me"}]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.10"
+keywords = ["ethereum", "smart-contracts", "ai", "security", "audit", "local-llm"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "click>=8.1.0",
+    "rich>=13.0.0",
+    "httpx>=0.27.0",
+    "web3>=6.0.0",
+    "pyyaml>=6.0",
+    "pydantic>=2.0.0",
+    "solc-select>=1.0.0",
+    "slither-analyzer>=0.10.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+    "mypy>=1.0.0",
+]
+
+[project.scripts]
+ai-crypto = "ai_crypto_toolkit.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/0xSero/ai-crypto-toolkit"
+Documentation = "https://github.com/0xSero/ai-crypto-toolkit/blob/main/README.md"
+Repository = "https://github.com/0xSero/ai-crypto-toolkit"
+Issues = "https://github.com/0xSero/ai-crypto-toolkit/issues"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.black]
+line-length = 100
+target-version = ['py310']
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true

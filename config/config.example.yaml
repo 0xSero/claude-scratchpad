@@ -1,0 +1,64 @@
+# AI Crypto Toolkit Configuration Example
+
+llm:
+  # Point to your local LLM API (vLLM, TabbyAPI, LM Studio, etc.)
+  # Common endpoints:
+  # - vLLM: http://localhost:8000/v1
+  # - TabbyAPI: http://localhost:5000/v1
+  # - LM Studio: http://localhost:1234/v1
+  # - llama.cpp: http://localhost:8080/v1
+  api_base: "http://localhost:8000/v1"
+
+  # Model name - use whatever your API server is running
+  # Good choices for code analysis:
+  # - Qwen/Qwen2.5-Coder-32B-Instruct (best overall)
+  # - deepseek-ai/deepseek-coder-33b-instruct (great security analysis)
+  # - codellama/CodeLlama-70b-Instruct-hf (good explanations)
+  model: "Qwen/Qwen2.5-Coder-32B-Instruct"
+
+  # Temperature: lower = more deterministic (0.0-2.0)
+  # 0.1 is good for code analysis
+  temperature: 0.1
+
+  # Max tokens for responses
+  # 4000 is usually enough, increase if analyzing large contracts
+  max_tokens: 4000
+
+  # Request timeout (seconds)
+  timeout: 300
+
+  # Enable streaming for real-time feedback (recommended)
+  stream: true
+
+  # API key (most local APIs use dummy keys)
+  api_key: "dummy-key"
+
+ethereum:
+  # Ethereum RPC URL for transaction analysis
+  # Local node:
+  rpc_url: "http://localhost:8545"
+
+  # Or use a service (get free key from Alchemy, Infura, etc.):
+  # rpc_url: "https://eth-mainnet.g.alchemy.com/v2/YOUR_API_KEY"
+  # rpc_url: "https://mainnet.infura.io/v3/YOUR_API_KEY"
+
+  # Request timeout
+  timeout: 30
+
+security:
+  # Which security checks to enable
+  check_reentrancy: true
+  check_overflow: true
+  check_access_control: true
+  check_delegatecall: true
+  check_tx_origin: true
+  check_unchecked_calls: true
+
+  # Custom vulnerability patterns (regex)
+  # Example: ['selfdestruct\(', 'suicide\(']
+  custom_patterns: []
+
+# Notes:
+# - You can override any setting with environment variables:
+#   LLM_API_BASE, LLM_MODEL, LLM_TEMPERATURE, etc.
+# - Copy this to ~/.ai-crypto-toolkit/config.yaml or use --config flag
